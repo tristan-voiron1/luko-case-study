@@ -8,8 +8,9 @@ export const TextInputWithTitle = ({
   title,
   placeholder,
   isMultiline = false,
+  text,
+  onChangeText,
 }: TextInputWithTitleProps) => {
-  const [text, onChangeText] = React.useState("");
   return (
     <View style={styles.container}>
       <Text>{title}</Text>

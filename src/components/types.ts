@@ -9,4 +9,6 @@ export interface TextInputWithTitleProps {
   title: string;
   placeholder: string;
   isMultiline?: boolean;
+  text: string;
+  onChangeText: (value: string) => void;
 }
