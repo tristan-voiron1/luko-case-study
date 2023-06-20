@@ -1,8 +1,10 @@
 import { StyleSheet, View } from "react-native";
+import React from "react";
 
 import Button from "../components/Button";
 import { RootTabScreenProps } from "../navigation/types";
 import { colors } from "../theme/colors";
+import { TextInputWithTitle } from "../components/TextInputWithTitle";
 
 export default function AddItemScreen({
   navigation,
@@ -12,6 +14,15 @@ export default function AddItemScreen({
       <View style={styles.buttonsContainer}>
         <Button title="Cancel" onPress={() => navigation.goBack()} />
         <Button title="Add" disabled onPress={() => undefined} />
+      </View>
+      <View style={styles.textContainer}>
+        <TextInputWithTitle title="Name" placeholder="Bracelet" />
+        <TextInputWithTitle title="Value" placeholder="700€" />
+        <TextInputWithTitle
+          title="Description"
+          placeholder="Optional"
+          isMultiline={true}
+        />
       </View>
     </View>
   );
@@ -31,5 +42,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "transparent",
+  },
+  textContainer: {
+    flex: 1,
+    marginTop: 60,
   },
 });
