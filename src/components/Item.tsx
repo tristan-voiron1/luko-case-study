@@ -19,7 +19,6 @@ const itemStyles = (index: number) =>
     container: {
       backgroundColor: colors.white,
       marginVertical: 20,
-      height: 265,
       flex: 1,
       flexGrow: 1,
       borderRadius: 14,

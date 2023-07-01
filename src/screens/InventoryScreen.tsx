@@ -4,21 +4,21 @@ import { RootTabScreenProps } from "../navigation/types";
 import { colors } from "../theme/colors";
 import { Item } from "../components/Item";
 import { useContext } from "react";
-import { InventoryContext } from "../../App";
+import { InventoryContext } from "../service/InventoryService";
 
 export default function InventoryScreen({
   navigation,
   route,
 }: RootTabScreenProps<"Inventory">) {
+  const { items } = useContext(InventoryContext);
   const handleAddButtonPress = () => navigation.navigate("AddItem");
-  const inventoryItems = useContext(InventoryContext);
 
   return (
     <View style={styles.container}>
       <Title onButtonPress={handleAddButtonPress}>{route.name}</Title>
       <FlatList
         numColumns={2}
-        data={inventoryItems}
+        data={items}
         renderItem={({ item, index }) => (
           <Item
             name={item.name}

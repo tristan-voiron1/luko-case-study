@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { StyleSheet, View, Modal, Alert } from "react-native";
 import Button from "../components/Button";
 import { InventoryItem, RootTabScreenProps } from "../navigation/types";
@@ -7,6 +7,7 @@ import { TextInputWithTitle } from "../components/TextInputWithTitle";
 import PhotoButton from "../components/PhotoButton";
 import { ImageInfo, ImagePicker } from "../sdk/ImagePicker";
 import Photo from "../components/Photo";
+import { InventoryContext } from "../service/InventoryService";
 
 export default function AddItemScreen({
   navigation,
@@ -16,6 +17,8 @@ export default function AddItemScreen({
     name: "",
     value: "",
   });
+
+  const { addAnItem } = useContext(InventoryContext);
 
   const setPickedPhoto = async () => {
     const selectedPhoto = await ImagePicker.pickImage();
@@ -32,7 +35,16 @@ export default function AddItemScreen({
   };
 
   const onSubmit = () => {
-    console.log("Submit");
+    const isItemAdded = addAnItem(item);
+    if (isItemAdded) {
+      navigation.goBack();
+    } else {
+      Alert.alert(
+        "Action failed",
+        "You can't add this item or your total value will exceed the limit of 40.000€",
+        [{ text: "OK" }]
+      );
+    }
   };
 
   const isDisabled = item.value && item.photo && item.name ? false : true;
